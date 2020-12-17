@@ -1,0 +1,157 @@
+<div class="bg-image" style="background-image: url({{movieDetails.backdropUrl}})">
+
+    <div class="row">
+        <div class="col-md-3 offset-2">
+
+            <!-- Movie Card row -->
+            <div>
+                <img src="{{movieDetails.posterUrl}}" class="card-img-top"/>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="row mt-2">
+                <div class="col-12">
+                    <h1 class="text-white">
+                        {{movieDetails.title}}
+                    </h1>
+                    <small class="text-muted"> {{movieDetails.tagline}} </small>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-4 text-secondary font-weight-bold mt-2">
+                    {{movieDetails.runTime}} m | {{releaseDate.getFullYear()}} 
+                </div>
+                <div class="col-8">
+                    <ul style="list-style-type:none">
+                        <li  *ngFor="let genre of movieDetails.genres">
+                            <!--To clickable to getmoviesbygenre-->
+                            <a class="badge badge-pill badge-dark ml-1" href="/movies/genre/{{genre.id}}" > 
+                                {{genre.name}}
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>           
+            </div>
+
+            <div class="row">
+                <div class="col-4 mt-3">
+                    <h5>
+                       
+                        <span class="badge badge-warning">
+                            Rating: {{movieDetails.rating}}
+                        </span>
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-light mt-2">
+                    {{movieDetails.overview}}
+                </div>
+            </div>
+        </div> 
+
+        <div class="col-md-2 mt-4 offset-1">
+            <ul class="list-group" style="background: none;"  >
+                <li class="list-group-item">
+                </li>
+                <li class="list-group-item">
+                    <button type="button"
+                            class="btn btn-outline-light btn-lg btn-block btn-sm">
+                        <i class="far fa-edit mr-1"></i>
+                        REVIEW
+                    </button>
+                </li>
+                <li class="list-group-item">
+                    <button type="button"
+                            class="btn btn-outline-light btn-lg btn-block btn-sm">  
+                        <i class="fas fa-play mr-1"></i> TRAILER
+                    </button>
+                </li>
+
+                <li class="list-group-item">
+                    <button type="button" class="btn btn-light btn-lg btn-block btn-sm" data-toggle="modal" data-target="#buyMovieModal">
+                        BUY {{movieDetails.price}}
+                    </button>
+
+                    <button type="button" class="btn btn-light btn-lg btn-block btn-sm">
+                        WATCH MOVIE
+                    </button>
+                </li>
+
+
+
+            </ul>     
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row mt-4">
+    <div class="col-4 moviefacts"> 
+        <h5>MOVIE FACTS</h5>
+        <hr>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <i class="far fa-calendar-alt mr-2"></i>Release Date
+                <span class="badge badge-pill badge-dark">{{releaseDate.toDateString()}} </span>
+            </li>
+
+            <li class="list-group-item">
+                <i class="fas fa-hourglass-half mr-2"></i>Run Time
+                <span class="badge badge-pill badge-dark">{{movieDetails.runTime}} m</span>
+            </li>
+            <li class="list-group-item">
+                <i class="far fa-money-bill-alt"></i> Box Office
+                <span class="badge badge-pill badge-pill badge-dark"> 
+                     {{  movieDetails.revenue | currency:'USD' }}
+                </span>
+            </li>
+
+            <li class="list-group-item">
+                <i class="fas fa-dollar-sign mr-2"></i> Budget
+                <span class="badge badge-pill badge-dark">
+                    {{  movieDetails.budget | currency:'USD' }}
+                </span>
+            </li>
+
+            <li class="list-group-item">
+                <i class="fab fa-imdb"></i>
+
+                <a href={{movieDetails.imdbUrl}}
+                   class="text-dark ml-3"
+                   target="_blank">
+                    
+                    <i class="fas fa-share-square mr-2"></i>
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <div class="col-4 offset-1">
+        <h5>CAST</h5>
+        <table class="table">
+            <tbody>
+                <tr *ngFor="let cast of movieDetails.casts">
+                    <td>
+                        <img src={{cast.profilePath}}
+                             class="cast-small-img rounded-circle"
+                             alt={{cast.name}}/>
+                    </td>
+                    <td> {{cast.name}} </td>
+                    <td>{{cast.character}}</td>
+                </tr>
+            </tbody> 
+        </table>
+
+    </div>
+
+
+
+
+</div>

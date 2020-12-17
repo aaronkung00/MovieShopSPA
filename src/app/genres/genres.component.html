@@ -1,0 +1,5 @@
+<ul class="list-unstyled p-2">
+    <li  *ngFor="let genre of genres">
+      <a ngbDropdownItem [routerLink]="['movies/genre', genre.id]">{{ genre.name }}</a>
+    </li>
+  </ul>
